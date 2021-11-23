@@ -1,0 +1,93 @@
+ALGORITHM PROBLEM1                                                                   
+VAR  A,B : ARRAY_OF INTEGER;
+VAR sum,i : INTEGER;
+BEGIN
+     sum = 0 
+     FOR i FROM 0 TO A.length STEP 1  DO
+         IF ((A[i] in B)= FALSE ) THEN
+             sum = sum + A[i]
+         END_IF
+     END_FOR
+     FOR i FROM 0 TO B.length STEP 1  DO
+         IF ((B[i] in A)= FALSE ) THEN
+             sum = sum + B[i]
+         END_IF
+     END_FOR
+    write("Sum of all distincts elements is ", sum)
+ 
+END
+
+
+ALGORITHM PROBLEM1 // with HASHTABLE
+VAR
+   A,B : ARRAY_OF INTEGER
+   hash : HASH_TABLE<INTEGER,INTEGER>
+   sum,i : INTEGER
+BEGIN
+    sum = 0
+    FOR i FROM 0 TO A.length STEP 1  DO
+        IF (hash.lookup(A[i]) = FALSE) THEN
+            hash.insert(A[i],1)
+        ELSE hash.insert(A[i],hash.get(A[i])+1)
+        END_IF
+    END_FOR
+    FOR i FROM 0 TO B.length STEP 1  DO
+        IF (hash.lookup(B[i])= FALSE) THEN
+            hash.insert(B[i],1)
+        ELSE hash.insert(B[i],hash.get(B[i])+1)
+        END_IF
+    END_FOR
+    FOR [key,value] of hash DO
+        IF (hash.get(key) = 1) THEN
+            sum = sum + key
+        END_IF
+    END_FOR
+    write("Sum of all distincts elements is ", sum)
+END
+ 
+ALGORITHM PROBLEM2                                                                   
+VAR  A,B : ARRAY_OF INTEGER;
+VAR sum,i : INTEGER;
+BEGIN
+     sum = 0
+     FOR i FROM 1 TO A.length STEP 1  DO
+         IF ((A[i] in B)) THEN
+             sum = sum + A[i]
+         END_IF
+     END_FOR
+     FOR i FROM 1 TO B.length STEP 1  DO
+         IF ((B[i] in A)) THEN
+             sum = sum + B[i]
+         END_IF
+     END_FOR
+    write("Sum of overlapping elements is", sum)
+END 
+
+
+
+ALGORITHM PROBLEM2 // with HASHTABLE
+VAR
+   A,B : ARRAY_OF INTEGER
+   hash : HASH_TABLE<INTEGER,INTEGER>
+   sum,i : INTEGER
+BEGIN
+    FOR i FROM 0 TO A.length STEP 1  DO
+        IF (hash.lookup(A[i])= FALSE) THEN
+            hash.insert(A[i],1)
+        ELSE hash.insert(A[i],hash.get(A[i])+1)
+        END_IF.
+    END_FOR
+    FOR i FROM 0 TO B.length STEP 1  DO
+        IF (hash.lookup(B[i])= FALSE) THEN
+            hash.insert(B[i],1)
+        ELSE hash.insert(B[i],hash.get(B[i])+1)
+       
+        END_IF
+    END_FOR
+    FOR [key,value] of hash DO
+        IF (hash.get(key) = 2 ) THEN
+            sum = sum + key*2
+        END_IF
+    END_FOR
+    write("Sum of overlapping elements is", sum)
+END                                                    
